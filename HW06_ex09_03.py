@@ -20,10 +20,53 @@
 
 # Body
 
+#Part (1)
+def avoids(word, forb_letters):
+	for letter in word:
+		if letter in forb_letters:
+			return False
+	return True
+
+#Part (2)
+def percent_avoids():
+	fin = open("words.txt")
+
+	total_count = 0
+	for line in fin:
+		total_count += 1
+
+	fin.close()
+
+	forb_string = raw_input("Enter a string of forbidden letters: ")
+
+	with open("words.txt") as f:
+		all_words = f.readlines()
+
+	num_clean = 0
+
+	for line in all_words:
+		if avoids(line, forb_string):
+			num_clean += 1
+			print line
+
+	percent_clean_word = round(100*(num_clean / float(total_count)), 3)
+
+	print num_clean
+	print percent_clean_word
+
+#Part (3)
+"""I'm not sure how to write a function to help me find this other than testing every possible
+combination of 5 letters and finding the minimum percent, however I'd guess that using all 5
+common vowels "aeiou" as the forbidden letters would do the trick. Passing these letters to my
+function in part 2 results in only 107 words (0.094%) being excluded"""
 
 ##############################################################################
 def main():
-    pass  # Call your function(s) here.
+
+    print avoids("cheerios", "se")
+    print avoids("chex", "a")
+
+    percent_avoids()
 
 if __name__ == '__main__':
     main()
